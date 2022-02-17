@@ -1,6 +1,6 @@
+import { lastValueFrom, EMPTY } from 'rxjs';
 import * as assert from 'assert'
 import { identity, pipe } from 'fp-ts/lib/function'
-import { EMPTY } from 'rxjs'
 import * as _ from '../src/Sub'
 
 describe('Sub', () => {
@@ -9,8 +9,8 @@ describe('Sub', () => {
       const fa = _.of(123)
       const fb = _.Functor.map(fa, identity)
 
-      const oa = await fa(EMPTY)({}).toPromise()
-      const ob = await fb(EMPTY)({}).toPromise()
+      const oa = await lastValueFrom(fa(EMPTY)({}))
+      const ob = await lastValueFrom(fb(EMPTY)({}))
 
       assert.deepStrictEqual(oa, ob)
     })
