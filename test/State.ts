@@ -1,3 +1,4 @@
+import { lastValueFrom } from 'rxjs';
 import * as assert from 'assert'
 import { of } from 'fp-ts-rxjs/lib/ReaderObservable'
 import { pipe } from 'fp-ts/lib/function'
@@ -15,7 +16,7 @@ describe('State', () => {
       const [m2, c2] = S.concat(x, S.concat(y, z))
 
       assert.deepStrictEqual(m1, m2)
-      assert.deepStrictEqual(await c1({}).toPromise(), await c2({}).toPromise())
+      assert.deepStrictEqual(await lastValueFrom(c1({})), await lastValueFrom(c2({})))
     })
   })
 
